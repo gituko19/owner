@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dapur Mizel 🍓✨ - Resep Dessert Ultra Kawaii</title>
+    
+    <!-- Google Fonts: Fredoka & Quicksand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Theme Customization -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        sans: ['Quicksand', 'sans-serif'],
+                    },
+                    colors: {
+                        mizel: {
+                            pink: '#FF6B8B',
+                            softPink: '#FFD3DD',
+                            lightPink: '#FFF0F5',
+                            strawberry: '#FF3366',
+                            cream: '#FFFDF9',
+                            lavender: '#E8D7FF',
+                            purple: '#9B51E0',
+                            darkText: '#4A2A38',
+                            mutedText: '#8C6878',
+                            mint: '#A8E6CF'
+                        }
+                    },
+                    boxShadow: {
+                        'kawaii': '0 10px 25px rgba(255, 107, 139, 0.25)',
+                        'kawaii-hover': '0 18px 35px rgba(255, 51, 102, 0.35)',
+                        'glow': '0 0 20px rgba(255, 107, 139, 0.5)',
+                        'card': '0 12px 30px rgba(255, 143, 177, 0.22)',
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                        '5xl': '2.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Style Sheet -->
+    <style>
+        body {
+            background-color: #FFF0F5;
+            background-image: radial-gradient(#FFB6C1 1.8px, transparent 1.8px), radial-gradient(#FFB6C1 1.8px, #FFF0F5 1.8px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            color: #4A2A38;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF0F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF6B8B;
+            border-radius: 99px;
+            border: 3px solid #FFF0F5;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF3366;
+        }
+
+        /* Glassmorphism Pink */
+        .glass-kawaii {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            border: 3px solid #FFD3DD;
+        }
+
+        /* Bouncy Jelly Button Effect */
+        .jelly-btn {
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .jelly-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+        }
+        .jelly-btn:active {
+            transform: translateY(2px) scale(0.96);
+        }
+
+        /* Floating Animation */
+        @keyframes kawaiiFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(4deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-kawaii-float {
+            animation: kawaiiFloat 3.5s ease-in-out infinite;
+        }
+
+        @keyframes mascotBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.05); }
+        }
+        .animate-mascot {
+            animation: mascotBounce 2.5s ease-in-out infinite;
+        }
+
+        /* Sparkle Particle Cursor Effect */
+        .sparkle-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 14px;
+            animation: fadeOutUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeOutUp {
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.8) rotate(20deg); }
+        }
+
+        /* Confetti Burst Particle */
+        .confetti-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            font-size: 20px;
+            animation: confettiFly 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes confettiFly {
+            0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
+            100% { opacity: 0; transform: translate(var(--cx), var(--cy)) scale(1.5) rotate(360deg); }
+        }
+
+        .ingredient-checkbox:checked + label {
+            text-decoration: line-through;
+            color: #8C6878;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-mizel-softPink selection:text-mizel-strawberry">
+
+    <header class="sticky top-0 z-30 glass-kawaii shadow-sm transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            <!-- Brand Logo -->
+            <a href="#" onclick="switchTab('all')" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-3xl bg-gradient-to-tr from-mizel-pink to-mizel-strawberry flex items-center justify-center text-white text-2xl shadow-kawaii group-hover:rotate-12 transition-transform duration-300 border-2 border-white">
+                    🍓
+                </div>
+                <div>
+                    <span class="font-fredoka text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-mizel-strawberry via-mizel-pink to-mizel-purple bg-clip-text text-transparent drop-shadow-xs">
+                        Dapur Mizel
+                    </span>
+                    <span class="block text-[11px] font-bold text-mizel-pink -mt-1 tracking-wider uppercase flex items-center gap-1">
+                        Spreading Sweetness & Joy! 🎀
+                    </span>
+                </div>
+            </a>
+
+            <!-- Nav Tabs Desktop -->
+            <nav class="hidden md:flex items-center gap-2 bg-mizel-softPink/60 p-1.5 rounded-full border-2 border-mizel-softPink">
+                <button id="tabAllBtn" onclick="switchTab('all')" class="px-5 py-2 rounded-full font-fredoka font-bold text-sm transition-all duration-300 bg-white text-mizel-strawberry shadow-sm jelly-btn">
+                    <i class="fa-solid fa-cookie-bite mr-2 text-mizel-pink"></i>Jelajahi Resep
+                </button>
+                <button id="tabFavBtn" onclick="switchTab('favs')" class="px-5 py-2 rounded-full font-fredoka font-bold text-sm transition-all duration-300 text-mizel-darkText hover:text-mizel-strawberry relative jelly-btn">
+                    <i class="fa-solid fa-heart mr-2 text-mizel-strawberry animate-bounce"></i>Favorit Saya
+                    <span id="favBadge" class="ml-1.5 px-2 py-0.5 text-xs bg-mizel-strawberry text-white rounded-full font-extrabold">0</span>
+                </button>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2.5">
+                <!-- Sound FX Toggle Button -->
+                <button id="soundToggleBtn" onclick="toggleSound()" class="w-10 h-10 rounded-full bg-white border-2 border-mizel-softPink text-mizel-pink hover:text-mizel-strawberry flex items-center justify-center shadow-sm jelly-btn" title="Aktifkan/Matikan Suara Imut">
+                    <i class="fa-solid fa-volume-high text-sm" id="soundIcon"></i>
+                </button>
+
+                <!-- Add Recipe Button -->
+                <button onclick="openAddRecipeModal()" class="px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-mizel-pink to-mizel-strawberry hover:from-mizel-strawberry hover:to-mizel-pink text-white font-fredoka font-bold text-sm shadow-kawaii hover:shadow-kawaii-hover transition-all duration-300 flex items-center gap-2 jelly-btn border-2 border-white">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                    <span class="hidden sm:inline">Tambah Resep 💖</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Bottom Navigation -->
+        <div class="md:hidden flex border-t-2 border-mizel-softPink bg-white/95 px-4 py-2 justify-around text-center text-xs">
+            <button onclick="switchTab('all')" id="mobileTabAll" class="flex-1 py-1 text-mizel-strawberry font-bold font-fredoka flex flex-col items-center gap-1">
+                <i class="fa-solid fa-cookie-bite text-base"></i>Jelajahi
+            </button>
+            <button onclick="switchTab('favs')" id="mobileTabFav" class="flex-1 py-1 text-mizel-darkText font-bold font-fredoka flex flex-col items-center gap-1 relative">
+                <i class="fa-solid fa-heart text-base text-mizel-strawberry"></i>Favorit (<span id="mobileFavBadge">0</span>)
+            </button>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden pt-8 pb-10 bg-gradient-to-b from-mizel-softPink/50 via-mizel-lightPink to-mizel-cream">
+        <!-- Floating Cute Props -->
+        <div class="absolute top-4 left-6 text-3xl animate-kawaii-float opacity-80 pointer-events-none">🌸</div>
+        <div class="absolute bottom-6 right-10 text-4xl animate-kawaii-float opacity-80 pointer-events-none" style="animation-delay: 1.5s;">🍰</div>
+        <div class="absolute top-1/2 right-1/4 text-2xl animate-kawaii-float opacity-60 pointer-events-none" style="animation-delay: 2.5s;">✨</div>
+        <div class="absolute top-10 right-10 text-3xl animate-kawaii-float opacity-70 pointer-events-none" style="animation-delay: 0.8s;">🍨</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-mizel-strawberry font-fredoka font-extrabold text-xs uppercase tracking-wider mb-3 border-2 border-mizel-softPink shadow-sm animate-pulse">
+                    ✨ Welcome to Mizel's Sweet Paradise ✨
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-fredoka font-extrabold text-mizel-darkText leading-tight mb-3">
+                    Bikin Dessert Cantik & Imut <br class="hidden sm:inline">
+                    <span class="bg-gradient-to-r from-mizel-strawberry via-mizel-pink to-mizel-purple bg-clip-text text-transparent">Jadi Makin Praktis! 🎀</span>
+                </h1>
+                <p class="text-xs sm:text-base text-mizel-mutedText font-semibold leading-relaxed max-w-xl mx-auto">
+                    Kumpulan panduan kreasi manis dengan pengatur porsi presisi, jam timer dapur interaktif, dan kejutan mood resep!
+                </p>
+            </div>
+
+            <!-- Search Bar & Randomizer -->
+            <div class="max-w-2xl mx-auto bg-white p-3 rounded-[32px] shadow-card border-3 border-mizel-softPink flex flex-col sm:flex-row gap-2">
+                <div class="relative flex-1 flex items-center">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 text-mizel-pink text-base"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari dessert manis... (misal: Strawberry, Mochi, Bingsu)" 
+                        class="w-full pl-11 pr-4 py-3 rounded-2xl border-none focus:outline-none text-sm font-bold text-mizel-darkText placeholder-mizel-softPink bg-transparent">
+                </div>
+                <button onclick="triggerSurpriseMe()" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-mizel-pink to-mizel-strawberry text-white font-fredoka font-bold text-sm shadow-sm transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap jelly-btn">
+                    <i class="fa-solid fa-dice text-lg"></i>
+                    <span>Surprise Me! ✨</span>
+                </button>
+            </div>
+
+            <!-- Dessert Mood Filter Section -->
+            <div class="mt-8 text-center">
+                <span class="text-xs font-fredoka font-extrabold text-mizel-strawberry uppercase tracking-wider block mb-3">
+                    🍓 Mau Dessert Sesuai Mood Kamu? Choose Below! 🍓
+                </span>
+                <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
+                    <button onclick="filterMood('all')" data-mood="all" class="mood-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-fredoka font-bold transition-all duration-200 bg-mizel-strawberry text-white shadow-sm border-2 border-mizel-strawberry jelly-btn">
+                        🎀 Semua Mood
+                    </button>
+                    <button onclick="filterMood('badmood')" data-mood="badmood" class="mood-btn px-4 py-2 rounded-full text-xs sm:text-sm font-fredoka font-bold transition-all duration-200 bg-white hover:bg-mizel-softPink/50 text-mizel-darkText border-2 border-mizel-softPink jelly-btn">
+                        🍧 Lagi Badmood
+                    </button>
+                    <button onclick="filterMood('melted')" data-mood="melted" class="mood-btn px-4 py-2 rounded-full text-xs sm:text-sm font-fredoka font-bold transition-all duration-200 bg-white hover:bg-mizel-softPink/50 text-mizel-darkText border-2 border-mizel-softPink jelly-btn">
+                        🍮 Pengen Melted
+                    </button>
+                    <button onclick="filterMood('fresh')" data-mood="fresh" class="mood-btn px-4 py-2 rounded-full text-xs sm:text-sm font-fredoka font-bold transition-all duration-200 bg-white hover:bg-mizel-softPink/50 text-mizel-darkText border-2 border-mizel-softPink jelly-btn">
+                        🍦 Butuh Seger
+                    </button>
+                    <button onclick="filterMood('happy')" data-mood="happy" class="mood-btn px-4 py-2 rounded-full text-xs sm:text-sm font-fredoka font-bold transition-all duration-200 bg-white hover:bg-mizel-softPink/50 text-mizel-darkText border-2 border-mizel-softPink jelly-btn">
+                        🍓 Super Happy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+        <!-- Section Header Bar -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4 pb-4 border-b-2 border-mizel-softPink">
+            <div>
+                <h2 id="sectionTitle" class="text-2xl font-fredoka font-bold text-mizel-darkText flex items-center gap-2">
+                    <span>🍓</span> Galeri Resep Dapur Mizel
+                </h2>
+                <p id="sectionSubtitle" class="text-xs sm:text-sm font-bold text-mizel-pink mt-0.5">Pilih hidangan manis favoritmu untuk mencerahkan harimu!</p>
+            </div>
+            <div class="text-xs sm:text-sm font-fredoka font-bold text-mizel-strawberry bg-white px-4 py-2 rounded-full border-2 border-mizel-softPink self-start sm:self-auto shadow-xs">
+                Tersedia <span id="recipeCount" class="font-extrabold text-mizel-strawberry">0</span> Resep Imut
+            </div>
+        </div>
+
+        <!-- Recipe Cards Grid -->
+        <div id="recipeGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Rendered Dynamically via JS -->
+        </div>
+
+        <!-- Empty State Container -->
+        <div id="emptyState" class="hidden text-center py-16 px-4 bg-white/80 rounded-[36px] border-3 border-dashed border-mizel-softPink max-w-lg mx-auto my-8 shadow-card">
+            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-mizel-lightPink text-mizel-pink flex items-center justify-center text-4xl shadow-inner border-2 border-mizel-softPink">
+                🍧
+            </div>
+            <h3 class="text-xl font-fredoka font-bold text-mizel-darkText mb-1">Resep Tidak Ditemukan</h3>
+            <p class="text-xs sm:text-sm text-mizel-mutedText max-w-md mx-auto mb-6 font-semibold">Maaf ya, Dapur Mizel belum menemukan resep yang sesuai dengan kata pencarianmu.</p>
+            <button onclick="resetFilters()" class="px-6 py-2.5 bg-mizel-strawberry hover:bg-mizel-pink text-white rounded-full font-fredoka font-bold text-xs sm:text-sm shadow-kawaii jelly-btn">
+                <i class="fa-solid fa-rotate-left mr-2"></i>Reset Filter
+            </button>
+        </div>
+    </main>
+
+    <div id="recipeDetailModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-mizel-darkText/60 backdrop-blur-md flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-[36px] max-w-3xl w-full overflow-hidden shadow-2xl my-8 relative transform transition-all duration-300 scale-95 opacity-0 border-4 border-mizel-softPink" id="modalContent">
+            
+            <!-- Close Modal Button -->
+            <button onclick="closeRecipeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/90 hover:bg-mizel-lightPink text-mizel-strawberry flex items-center justify-center shadow-md backdrop-blur-md transition-transform hover:scale-110 border-2 border-mizel-softPink">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Banner Image -->
+            <div class="relative h-64 sm:h-80 w-full bg-mizel-softPink overflow-hidden">
+                <img id="modalImg" src="" alt="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-mizel-darkText/80 via-mizel-darkText/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span id="modalCategory" class="px-3 py-1 bg-mizel-strawberry text-white text-xs font-fredoka font-bold rounded-full uppercase tracking-wider shadow-sm"></span>
+                        <span id="modalMoodTag" class="px-3 py-1 bg-white/30 backdrop-blur-md text-white text-xs font-bold rounded-full border border-white/40"></span>
+                    </div>
+                    <h2 id="modalTitle" class="text-2xl sm:text-3xl font-fredoka font-extrabold leading-tight drop-shadow-sm"></h2>
+                    <div class="flex items-center gap-4 mt-3 text-xs sm:text-sm text-mizel-softPink font-bold">
+                        <span><i class="fa-solid fa-clock mr-1.5"></i><span id="modalTime"></span> Menit</span>
+                        <span><i class="fa-solid fa-fire text-mizel-pink mr-1.5"></i><span id="modalCalories"></span> kcal</span>
+                        <span><i class="fa-solid fa-star text-amber-300 mr-1.5"></i><span id="modalRating"></span> (<span id="modalReviews"></span> ulasan)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Body Scrollable -->
+            <div class="p-6 sm:p-8 max-h-[60vh] overflow-y-auto space-y-8">
+                <!-- Description -->
+                <div>
+                    <p id="modalDesc" class="text-xs sm:text-sm text-mizel-darkText font-semibold leading-relaxed italic border-l-4 border-mizel-pink pl-4 py-2 bg-mizel-lightPink/80 rounded-r-2xl"></p>
+                </div>
+
+                <!-- Portion Scaler Controls & Ingredients -->
+                <div class="bg-mizel-lightPink p-5 rounded-[28px] border-2 border-mizel-softPink">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b-2 border-mizel-softPink">
+                        <div>
+                            <h3 class="text-lg font-fredoka font-bold text-mizel-darkText flex items-center gap-2">
+                                <span>🍓</span> Bahan-Bahan & Check List
+                            </h3>
+                            <p class="text-xs font-semibold text-mizel-strawberry">Centang bahan jika sudah kamu siapkan di meja!</p>
+                        </div>
+
+                        <!-- Portion Scaler Controls (+ / -) -->
+                        <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-2xl border-2 border-mizel-softPink self-start sm:self-auto shadow-xs">
+                            <span class="text-xs font-fredoka font-bold text-mizel-darkText">Porsi:</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="changePortionBy(-1)" class="w-6 h-6 rounded-full bg-mizel-lightPink hover:bg-mizel-softPink text-mizel-strawberry font-bold text-xs flex items-center justify-center transition-colors">-</button>
+                                <span id="portionCountText" class="px-2 font-fredoka font-extrabold text-mizel-strawberry text-sm">1</span>
+                                <button onclick="changePortionBy(1)" class="w-6 h-6 rounded-full bg-mizel-lightPink hover:bg-mizel-softPink text-mizel-strawberry font-bold text-xs flex items-center justify-center transition-colors">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar Kelengkapan Bahan -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center text-xs font-fredoka font-bold text-mizel-darkText mb-1">
+                            <span>Progress Persiapan Bahan:</span>
+                            <span id="ingredientProgressText" class="text-mizel-strawberry">0%</span>
+                        </div>
+                        <div class="w-full bg-white h-3 rounded-full overflow-hidden p-0.5 border border-mizel-softPink">
+                            <div id="ingredientProgressBar" class="bg-gradient-to-r from-mizel-pink to-mizel-strawberry h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Ingredients List -->
+                    <ul id="modalIngredientsList" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <!-- Rendered dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Steps Instructions with Built-in Timers -->
+                <div>
+                    <h3 class="text-lg font-fredoka font-bold text-mizel-darkText mb-4 flex items-center gap-2">
+                        <span>✨</span> Langkah Pembuatan & Kitchen Timer
+                    </h3>
+                    <div id="modalStepsList" class="space-y-4">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Nutrition Information -->
+                <div class="bg-mizel-softPink/40 p-5 rounded-[28px] border-2 border-mizel-softPink">
+                    <h4 class="text-xs font-fredoka font-bold text-mizel-strawberry uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <span>📊</span> Nilai Gizi Per Porsi
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                        <div class="bg-white p-3 rounded-2xl shadow-xs border border-mizel-softPink">
+                            <span class="block text-[11px] font-bold text-mizel-mutedText">Kalori</span>
+                            <span id="nutrCal" class="text-sm font-fredoka font-extrabold text-mizel-strawberry">-</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl shadow-xs border border-mizel-softPink">
+                            <span class="block text-[11px] font-bold text-mizel-mutedText">Karbohidrat</span>
+                            <span id="nutrCarbs" class="text-sm font-fredoka font-extrabold text-mizel-strawberry">-</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl shadow-xs border border-mizel-softPink">
+                            <span class="block text-[11px] font-bold text-mizel-mutedText">Protein</span>
+                            <span id="nutrProtein" class="text-sm font-fredoka font-extrabold text-mizel-darkText">-</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl shadow-xs border border-mizel-softPink">
+                            <span class="block text-[11px] font-bold text-mizel-mutedText">Lemak</span>
+                            <span id="nutrFat" class="text-sm font-fredoka font-extrabold text-mizel-darkText">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-mizel-lightPink border-t-2 border-mizel-softPink flex items-center justify-between">
+                <button id="modalFavToggleBtn" onclick="" class="px-5 py-2.5 rounded-full border-2 border-mizel-pink text-mizel-strawberry hover:bg-mizel-softPink font-fredoka font-bold text-xs sm:text-sm transition-colors flex items-center gap-2 jelly-btn">
+                    <i class="fa-regular fa-heart"></i> Simpan ke Favorit
+                </button>
+                <button onclick="closeRecipeModal()" class="px-6 py-2.5 rounded-full bg-mizel-darkText hover:bg-black text-white font-fredoka font-bold text-xs sm:text-sm transition-colors jelly-btn">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="addRecipeModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-mizel-darkText/60 backdrop-blur-md flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-[36px] max-w-2xl w-full overflow-hidden shadow-2xl p-6 sm:p-8 relative my-8 border-4 border-mizel-softPink">
+            <button onclick="closeAddRecipeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-mizel-lightPink text-mizel-strawberry flex items-center justify-center hover:bg-mizel-softPink transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <h3 class="text-2xl font-fredoka font-bold text-mizel-darkText flex items-center gap-2">
+                    <span>🎀</span> Tambah Resep Baru Dapur Mizel
+                </h3>
+                <p class="text-xs text-mizel-strawberry font-bold">Simpan kreasi manis buatanmu sendiri ke galeri koleksi ini!</p>
+            </div>
+
+            <form id="addRecipeForm" onsubmit="handleAddRecipe(event)" class="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
+                <div>
+                    <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">Nama Resep *</label>
+                    <input type="text" id="newTitle" required placeholder="misal: Fluffy Strawberry Parfait" 
+                        class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-sm font-bold text-mizel-darkText">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">Kategori Mood *</label>
+                        <select id="newMood" required class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-sm font-bold text-mizel-darkText bg-white">
+                            <option value="happy">🍓 Super Happy</option>
+                            <option value="badmood">🍧 Lagi Badmood</option>
+                            <option value="melted">🍮 Pengen Melted</option>
+                            <option value="fresh">🍦 Butuh Seger</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">Tingkat Kesulitan *</label>
+                        <select id="newDifficulty" required class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-sm font-bold text-mizel-darkText bg-white">
+                            <option value="Mudah">Mudah ✨</option>
+                            <option value="Sedang">Sedang 🎀</option>
+                            <option value="Mahir">Mahir 💖</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">Waktu (Menit) *</label>
+                        <input type="number" id="newTime" required min="1" placeholder="20" class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-sm font-bold text-mizel-darkText">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">Kalori (kcal)</label>
+                        <input type="number" id="newCalories" placeholder="210" class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-sm font-bold text-mizel-darkText">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">URL Foto Resep</label>
+                    <input type="url" id="newImg" placeholder="https://images.unsplash.com/photo-..." class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-sm font-bold text-mizel-darkText">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">Deskripsi Singkat</label>
+                    <textarea id="newDesc" rows="2" placeholder="Ceritakan kelezatan resep ini..." class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-sm font-bold text-mizel-darkText"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">Bahan-Bahan (1 Bahan Per Baris: [Takaran] [Satuan] [Bahan]) *</label>
+                    <textarea id="newIngredients" rows="3" required placeholder="200 gram Tepung Terigu&#10;100 gram Gula Pasir&#10;2 butir Telur Ayam" class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-xs font-mono"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-fredoka font-bold text-mizel-darkText uppercase mb-1">Langkah Pembuatan (1 Langkah Per Baris) *</label>
+                    <textarea id="newSteps" rows="3" required placeholder="1. Kocok telur dan gula hingga mengembang&#10;2. Tambahkan tepung terigu secara bertahap&#10;3. Panggang hingga keemasan" class="w-full px-4 py-2.5 rounded-2xl border-2 border-mizel-softPink focus:outline-none focus:border-mizel-pink text-xs font-mono"></textarea>
+                </div>
+
+                <div class="pt-3 flex justify-end gap-3 border-t border-mizel-softPink">
+                    <button type="button" onclick="closeAddRecipeModal()" class="px-5 py-2.5 rounded-full bg-mizel-lightPink text-mizel-darkText font-fredoka font-bold text-xs hover:bg-mizel-softPink">Batal</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-full bg-mizel-strawberry hover:bg-mizel-pink text-white font-fredoka font-bold text-xs shadow-kawaii jelly-btn">Simpan Resep ✨</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Interactive Floating Mascot "Mizel 🐰🍓" -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end pointer-events-none">
+        <!-- Speech Bubble Dialog -->
+        <div id="mascotBubble" class="hidden mb-2 p-3.5 bg-white rounded-3xl shadow-2xl border-3 border-mizel-softPink max-w-xs pointer-events-auto transform transition-all duration-300 scale-95 origin-bottom-right">
+            <p id="mascotText" class="text-xs font-bold text-mizel-darkText leading-relaxed">
+                "Halo! Aku Mizel 🐰🍓. Klik aku kalau butuh tips resep manis ya!"
+            </p>
+        </div>
+
+        <!-- Mascot Clickable Avatar -->
+        <button onclick="triggerMascotDialogue()" class="pointer-events-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-mizel-pink to-mizel-strawberry p-1 shadow-kawaii hover:shadow-kawaii-hover transition-transform duration-300 animate-mascot jelly-btn border-4 border-white relative group" title="Klik Mizel untuk Tips!">
+            <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-3xl sm:text-4xl shadow-inner">
+                🐰
+            </div>
+            <span class="absolute -top-1 -right-1 w-6 h-6 bg-mizel-strawberry text-white text-[10px] font-fredoka font-bold rounded-full flex items-center justify-center border-2 border-white">
+                🍓
+            </span>
+        </button>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 left-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <footer class="bg-mizel-darkText text-white mt-16 pt-12 pb-8 border-t-4 border-mizel-pink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-mizel-darkText/60">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-2xl bg-mizel-strawberry flex items-center justify-center text-white text-xl shadow-md">
+                            🍓
+                        </div>
+                        <span class="text-2xl font-fredoka font-bold text-white">Dapur Mizel</span>
+                    </div>
+                    <p class="text-xs text-mizel-softPink/80 leading-relaxed font-semibold">
+                        Sajian resep dessert imut, manis, dan gampang dipraktikkan. Hadirkan senyum dan kebahagiaan manis di meja makanmu! ✨
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-fredoka font-bold text-mizel-pink uppercase tracking-wider mb-3">Dessert Moods</h4>
+                    <ul class="text-xs text-mizel-softPink/80 space-y-2 font-semibold">
+                        <li><a href="#" onclick="filterMood('happy')" class="hover:text-mizel-pink transition-colors">🍓 Super Happy Desserts</a></li>
+                        <li><a href="#" onclick="filterMood('badmood')" class="hover:text-mizel-pink transition-colors">🍧 Badmood Eraser Bingsu</a></li>
+                        <li><a href="#" onclick="filterMood('melted')" class="hover:text-mizel-pink transition-colors">🍮 Melted Pudding & Cream</a></li>
+                        <li><a href="#" onclick="filterMood('fresh')" class="hover:text-mizel-pink transition-colors">🍦 Fresh Ice Cream Treats</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-fredoka font-bold text-mizel-pink uppercase tracking-wider mb-3">Spreading Sweetness</h4>
+                    <p class="text-xs text-mizel-softPink/80 mb-3 font-semibold">Bagikan foto sajian dessert buatanmu dengan hashtag #DapurMizel 🎀</p>
+                    <div class="flex gap-3 text-lg">
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-mizel-pink text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-mizel-pink text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-mizel-pink text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6 text-center text-xs font-semibold text-mizel-softPink/60">
+                &copy; 2026 Dapur Mizel 🍓✨. All Rights Reserved. Crafted with <i class="fa-solid fa-heart text-mizel-pink"></i> for sweet dessert lovers.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Web Audio API Sound Synthesizer (No External Files Required)
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playPopSound() {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.08);
+            } catch(e) {}
+        }
+
+        function playChimeSound() {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + i * 0.06);
+                    gain.gain.setValueAtTime(0.15, now + i * 0.06);
+                    gain.gain.linearRampToValueAtTime(0.01, now + i * 0.06 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now + i * 0.06);
+                    osc.stop(now + i * 0.06 + 0.25);
+                });
+            } catch(e) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            if (soundEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-sm';
+                showToast('Suara Imut Diaktifkan! 🔔', 'info');
+                playPopSound();
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-sm';
+                showToast('Suara Dimatikan', 'info');
+            }
+        }
+
+        // Cursor Sparkle Trail
+        window.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.12) {
+                const particle = document.createElement('div');
+                particle.className = 'sparkle-particle';
+                const symbols = ['✨', '💖', '🌸', '⭐', '🍓'];
+                particle.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                
+                const dx = (Math.random() - 0.5) * 60;
+                const dy = (Math.random() - 0.5) * 60 - 20;
+                particle.style.setProperty('--dx', `${dx}px`);
+                particle.style.setProperty('--dy', `${dy}px`);
+
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 800);
+            }
+        });
+
+        // Heart Burst Confetti Effect
+        function triggerHeartBurst(x, y) {
+            playChimeSound();
+            const count = 22;
+            const symbols = ['💖', '✨', '🍓', '🎀', '🌸', '⭐'];
+            
+            for (let i = 0; i < count; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti-particle';
+                conf.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                conf.style.left = (x || window.innerWidth / 2) + 'px';
+                conf.style.top = (y || window.innerHeight / 2) + 'px';
+
+                const angle = (i / count) * 2 * Math.PI;
+                const distance = 80 + Math.random() * 120;
+                const cx = Math.cos(angle) * distance;
+                const cy = Math.sin(angle) * distance;
+
+                conf.style.setProperty('--cx', `${cx}px`);
+                conf.style.setProperty('--cy', `${cy}px`);
+
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 1200);
+            }
+        }
+
+        // Mascot Mizel Dialogue Database
+        const mascotQuotes = [
+            "Bikin dessert itu kuncinya satu: Pakai takaran cinta! Hihi 🍓",
+            "Tips Mizel: Dinginkan whipped cream di kulkas sebelum dikocok biar kaku sempurna! 🍦",
+            "Lagi sedih? Bingsu stroberi dingin dijamin bikin mood balik ceria! 🍧",
+            "Jangan ragu tambahkan topping ekstra stroberi di atas kue kamu ya! ✨",
+            "Di Mizel's kitchen, nggak ada kata gagal—semua kreasi manis itu unik! 💖",
+            "Tahukah kamu? Aroma vanila asli bisa memberikan efek menenangkan lho! 🍮",
+            "Ayo centang semua bahan resepmu di checklist biar nggak ada yang ketinggalan! 📝"
+        ];
+
+        function triggerMascotDialogue() {
+            playPopSound();
+            const bubble = document.getElementById('mascotBubble');
+            const text = document.getElementById('mascotText');
+
+            const randomQuote = mascotQuotes[Math.floor(Math.random() * mascotQuotes.length)];
+            text.innerText = `"${randomQuote}"`;
+
+            bubble.classList.remove('hidden');
+            setTimeout(() => {
+                bubble.classList.remove('scale-95', 'opacity-0');
+                bubble.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            setTimeout(() => {
+                bubble.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => bubble.classList.add('hidden'), 300);
+            }, 5000);
+        }
+
+        // Default Recipe Database
+        const initialRecipes = [
+            {
+                id: 'mizel-1',
+                title: 'Strawberry Cloud Shortcake 🍰',
+                mood: 'happy',
+                moodLabel: '🍓 Super Happy',
+                categoryLabel: 'Cake & Roll',
+                difficulty: 'Sedang 🎀',
+                time: 30,
+                calories: 230,
+                rating: 5.0,
+                reviewsCount: 142,
+                image: 'https://cdn.imagetourls.com/uploads/tyImg/17BANBjhA.jpg',
+                description: 'Bolu gulung super lembut beraroma vanila dengan isian whipped cream manis melimpah dan potongan stroberi segar.',
+                ingredients: [
+                    { name: 'Tepung Terigu Pro Rendah', baseAmount: 80, unit: 'g' },
+                    { name: 'Telur Ayam Segar', baseAmount: 4, unit: 'butir' },
+                    { name: 'Gula Halus', baseAmount: 70, unit: 'g' },
+                    { name: 'Susu Cair Full Cream', baseAmount: 40, unit: 'ml' },
+                    { name: 'Whipped Cream', baseAmount: 150, unit: 'ml' },
+                    { name: 'Buah Stroberi Potong', baseAmount: 100, unit: 'g' }
+                ],
+                steps: [
+                    { text: 'Pisahkan kuning dan putih telur. Kocok kuning telur dengan sebagian gula halus dan susu hingga rata.', timerMinutes: 3 },
+                    { text: 'Kocok putih telur dan sisa gula hingga mengembang kaku (stiff peak).', timerMinutes: 5 },
+                    { text: 'Panggang di oven suhu 170°C selama 18 menit hingga matang keemasan.', timerMinutes: 18 },
+                    { text: 'Oleskan whipped cream dan potongan stroberi di atas kue, gulung perlahan lalu simpan di kulkas.', timerMinutes: 15 }
+                ],
+                nutrition: { calories: '230 kcal', carbs: '28g', protein: '5g', fat: '11g' }
+            },
+            {
+                id: 'mizel-2',
+                title: 'Kawaii Snow Strawberry Bingsu 🍧',
+                mood: 'badmood',
+                moodLabel: '🍧 Lagi Badmood',
+                categoryLabel: 'Cold Ice Cream',
+                difficulty: 'Mudah ✨',
+                time: 10,
+                calories: 180,
+                rating: 4.9,
+                reviewsCount: 118,
+                image: 'https://cdn.imagetourls.com/uploads/tyImg/AHZZ3IWj.jpg',
+                description: 'Es serut susu super halus ala Korea ditumpuk melimpah dengan selai stroberi buah asli dan es krim vanila.',
+                ingredients: [
+                    { name: 'Susu UHT Manis (Beku)', baseAmount: 300, unit: 'ml' },
+                    { name: 'Selai Stroberi Buah Asli', baseAmount: 4, unit: 'sdm' },
+                    { name: 'Buah Stroberi Segar', baseAmount: 6, unit: 'buah' },
+                    { name: 'Susu Kental Manis Pink', baseAmount: 3, unit: 'sdm' },
+                    { name: 'Scoop Es Krim Vanila', baseAmount: 1, unit: 'scoop' }
+                ],
+                steps: [
+                    { text: 'Serut es susu yang sudah dibekukan hingga sehalus salju.', timerMinutes: 0 },
+                    { text: 'Tata es serut halus di mangkuk manis kesayanganmu.', timerMinutes: 0 },
+                    { text: 'Beri topping selai stroberi, irisan stroberi segar, dan es krim vanila di puncaknya.', timerMinutes: 0 },
+                    { text: 'Siramkan susu kental manis dan nikmati selagi dingin!', timerMinutes: 0 }
+                ],
+                nutrition: { calories: '180 kcal', carbs: '32g', protein: '4g', fat: '4g' }
+            },
+            {
+                id: 'mizel-3',
+                title: 'Silky Peach Panna Cotta 🍮',
+                mood: 'melted',
+                moodLabel: '🍮 Pengen Melted',
+                categoryLabel: 'Pudding & Cream',
+                difficulty: 'Mudah ✨',
+                time: 15,
+                calories: 160,
+                rating: 4.9,
+                reviewsCount: 89,
+                image: 'https://cdn.imagetourls.com/uploads/tyImg/1cyIrbTH2.jpg',
+                description: 'Puding krim Italia super lembut dan lumer di mulut disajikan dengan saus persik manis dan sari buah segar.',
+                ingredients: [
+                    { name: 'Whipping Cream Cair', baseAmount: 200, unit: 'ml' },
+                    { name: 'Susu Cair Full Cream', baseAmount: 100, unit: 'ml' },
+                    { name: 'Gula Pasir', baseAmount: 40, unit: 'g' },
+                    { name: 'Gelatin Bubuk + Air', baseAmount: 1.5, unit: 'sdt' },
+                    { name: 'Puree Buah Persik', baseAmount: 80, unit: 'g' }
+                ],
+                steps: [
+                    { text: 'Tim gelatin dengan air dingin hingga mengembang bening.', timerMinutes: 2 },
+                    { text: 'Panaskan whipping cream, susu, dan gula pasir hingga hangat.', timerMinutes: 5 },
+                    { text: 'Masukkan gelatin larut, aduk rata dan tuang ke gelas kecil.', timerMinutes: 0 },
+                    { text: 'Dinginkan di kulkas minimal 2 jam hingga set sempurna.', timerMinutes: 10 }
+                ],
+                nutrition: { calories: '160 kcal', carbs: '20g', protein: '3g', fat: '8g' }
+            },
+            {
+                id: 'mizel-4',
+                title: 'Pink Raspberry Macaron 🥐',
+                mood: 'happy',
+                moodLabel: '🍓 Super Happy',
+                categoryLabel: 'Pastry & Cookie',
+                difficulty: 'Mahir 💖',
+                time: 40,
+                calories: 190,
+                rating: 5.0,
+                reviewsCount: 95,
+                image: 'https://cdn.imagetourls.com/uploads/tyImg/8aPUYq0u.jpg',
+                description: 'Kue macaron Perancis berwarna merah muda cantik dengan kaki macaron sempurna dan isian buttercream rasberi manis.',
+                ingredients: [
+                    { name: 'Tepung Almond Halus', baseAmount: 100, unit: 'g' },
+                    { name: 'Gula Halus / Icing Sugar', baseAmount: 100, unit: 'g' },
+                    { name: 'Putih Telur Suhu Ruang', baseAmount: 2, unit: 'butir' },
+                    { name: 'Gula Pasir', baseAmount: 35, unit: 'g' },
+                    { name: 'Buttercream Rasberi', baseAmount: 80, unit: 'g' }
+                ],
+                steps: [
+                    { text: 'Ayak tepung almond dan gula halus hingga sangat halus.', timerMinutes: 3 },
+                    { text: 'Kocok putih telur dan gula hingga kaku mengkilap (meringue). Beri pewarna merah muda.', timerMinutes: 6 },
+                    { text: 'Lakukan teknik macaronage hingga adonan menyerupai pita leleh.', timerMinutes: 4 },
+                    { text: 'Semprotkan di loyang, diamkan 30 menit lalu panggang 150°C selama 14 menit.', timerMinutes: 14 }
+                ],
+                nutrition: { calories: '190 kcal', carbs: '25g', protein: '4g', fat: '9g' }
+            },
+            {
+                id: 'mizel-5',
+                title: 'Strawberry Cream Souffle Pancake 🥞',
+                mood: 'melted',
+                moodLabel: '🍮 Pengen Melted',
+                categoryLabel: 'Cake & Roll',
+                difficulty: 'Sedang 🎀',
+                time: 20,
+                calories: 220,
+                rating: 4.8,
+                reviewsCount: 130,
+                image: 'https://cdn.imagetourls.com/uploads/tyImg/myV0EPlI.jpg',
+                description: 'Pancake Jepang fluffy bergoyang yang super lembut, disajikan dengan lelehan krim stroberi dan taburan gula halus.',
+                ingredients: [
+                    { name: 'Kuning Telur', baseAmount: 2, unit: 'butir' },
+                    { name: 'Putih Telur', baseAmount: 2, unit: 'butir' },
+                    { name: 'Susu Cair', baseAmount: 20, unit: 'ml' },
+                    { name: 'Tepung Terigu Pro Rendah', baseAmount: 35, unit: 'g' },
+                    { name: 'Gula Pasir', baseAmount: 25, unit: 'g' }
+                ],
+                steps: [
+                    { text: 'Campur kuning telur, susu, dan tepung hingga rata licin.', timerMinutes: 2 },
+                    { text: 'Kocok putih telur dan gula hingga kaku mengkilap (stiff peak).', timerMinutes: 5 },
+                    { text: 'Masak di wajan teflon anti lengket dengan api kecil selama 4 menit per sisi.', timerMinutes: 8 }
+                ],
+                nutrition: { calories: '220 kcal', carbs: '29g', protein: '6g', fat: '8g' }
+            },
+            {
+                id: 'mizel-6',
+                title: 'Fresh Berry Yogurt Popsicle 🍦',
+                mood: 'fresh',
+                moodLabel: '🍦 Butuh Seger',
+                categoryLabel: 'Cold Ice Cream',
+                difficulty: 'Mudah ✨',
+                time: 10,
+                calories: 120,
+                rating: 4.9,
+                reviewsCount: 76,
+                image: 'https://cdn.imagetourls.com/uploads/tyImg/XOggZ8oP.jpg',
+                description: 'Es krim stik yogurt dingin yang menyegarkan dipadu dengan potongan segar buah blueberry, rasberi, dan stroberi.',
+                ingredients: [
+                    { name: 'Greek Yogurt Vanila', baseAmount: 250, unit: 'g' },
+                    { name: 'Madu Murni', baseAmount: 2, unit: 'sdm' },
+                    { name: 'Campuran Buah Beri Segar', baseAmount: 100, unit: 'g' },
+                    { name: 'Sari Buah Lemon', baseAmount: 1, unit: 'sdt' }
+                ],
+                steps: [
+                    { text: 'Campur Greek yogurt dengan madu murni dan sari buah lemon.', timerMinutes: 2 },
+                    { text: 'Masukkan potongan buah beri segar ke dalam cetakan es stik imut.', timerMinutes: 0 },
+                    { text: 'Tuang adonan yogurt ke cetakan dan bekukan di freezer minimal 4 jam.', timerMinutes: 0 }
+                ],
+                nutrition: { calories: '120 kcal', carbs: '18g', protein: '5g', fat: '2g' }
+            }
+        ];
+
+        // State Variables
+        let recipes = [];
+        let favorites = [];
+        let currentTab = 'all'; 
+        let currentMood = 'all';
+        let searchQuery = '';
+        let currentModalRecipe = null;
+        let activePortionMultiplier = 1;
+        let checkedIngredientsCount = 0;
+        let activeTimerIntervals = {};
+
+        // App Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            loadLocalStorageData();
+            renderRecipesGrid();
+            updateFavBadges();
+        });
+
+        function loadLocalStorageData() {
+            const savedCustom = localStorage.getItem('dapurmizel_custom_recipes');
+            const customRecipes = savedCustom ? JSON.parse(savedCustom) : [];
+            recipes = [...initialRecipes, ...customRecipes];
+
+            const savedFavs = localStorage.getItem('dapurmizel_favs');
+            favorites = savedFavs ? JSON.parse(savedFavs) : [];
+        }
+
+        function saveFavoritesToStorage() {
+            localStorage.setItem('dapurmizel_favs', JSON.stringify(favorites));
+            updateFavBadges();
+        }
+
+        function saveCustomRecipesToStorage(newRecipe) {
+            const savedCustom = localStorage.getItem('dapurmizel_custom_recipes');
+            const customRecipes = savedCustom ? JSON.parse(savedCustom) : [];
+            customRecipes.push(newRecipe);
+            localStorage.setItem('dapurmizel_custom_recipes', JSON.stringify(customRecipes));
+        }
+
+        function updateFavBadges() {
+            document.getElementById('favBadge').innerText = favorites.length;
+            document.getElementById('mobileFavBadge').innerText = favorites.length;
+        }
+
+        // Tab Navigation Switch
+        function switchTab(tab) {
+            playPopSound();
+            currentTab = tab;
+            const tabAllBtn = document.getElementById('tabAllBtn');
+            const tabFavBtn = document.getElementById('tabFavBtn');
+            const mobileTabAll = document.getElementById('mobileTabAll');
+            const mobileTabFav = document.getElementById('mobileTabFav');
+
+            if (tab === 'all') {
+                tabAllBtn.className = 'px-5 py-2 rounded-full font-fredoka font-bold text-sm transition-all duration-300 bg-white text-mizel-strawberry shadow-sm jelly-btn';
+                tabFavBtn.className = 'px-5 py-2 rounded-full font-fredoka font-bold text-sm transition-all duration-300 text-mizel-darkText hover:text-mizel-strawberry relative jelly-btn';
+                
+                mobileTabAll.className = 'flex-1 py-1 text-mizel-strawberry font-bold font-fredoka flex flex-col items-center gap-1';
+                mobileTabFav.className = 'flex-1 py-1 text-mizel-darkText font-bold font-fredoka flex flex-col items-center gap-1 relative';
+
+                document.getElementById('sectionTitle').innerHTML = '<span>🍓</span> Galeri Resep Dapur Mizel';
+                document.getElementById('sectionSubtitle').innerText = 'Pilih hidangan manis favoritmu untuk mencerahkan harimu!';
+            } else {
+                tabFavBtn.className = 'px-5 py-2 rounded-full font-fredoka font-bold text-sm transition-all duration-300 bg-white text-mizel-strawberry shadow-sm relative jelly-btn';
+                tabAllBtn.className = 'px-5 py-2 rounded-full font-fredoka font-bold text-sm transition-all duration-300 text-mizel-darkText hover:text-mizel-strawberry jelly-btn';
+                
+                mobileTabFav.className = 'flex-1 py-1 text-mizel-strawberry font-bold font-fredoka flex flex-col items-center gap-1 relative';
+                mobileTabAll.className = 'flex-1 py-1 text-mizel-darkText font-bold font-fredoka flex flex-col items-center gap-1';
+
+                document.getElementById('sectionTitle').innerHTML = '<span>💖</span> Resep Favorit Saya';
+                document.getElementById('sectionSubtitle').innerText = 'Koleksi resep dessert manis pilihan yang sudah kamu simpan!';
+            }
+
+            renderRecipesGrid();
+        }
+
+        // Mood Filter Handler
+        function filterMood(mood) {
+            playPopSound();
+            currentMood = mood;
+            
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                if (btn.getAttribute('data-mood') === mood) {
+                    btn.className = 'mood-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-fredoka font-bold transition-all duration-200 bg-mizel-strawberry text-white shadow-sm border-2 border-mizel-strawberry jelly-btn';
+                } else {
+                    btn.className = 'mood-btn px-4 py-2 rounded-full text-xs sm:text-sm font-fredoka font-bold transition-all duration-200 bg-white hover:bg-mizel-softPink/50 text-mizel-darkText border-2 border-mizel-softPink jelly-btn';
+                }
+            });
+
+            renderRecipesGrid();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+            renderRecipesGrid();
+        }
+
+        function resetFilters() {
+            playPopSound();
+            document.getElementById('searchInput').value = '';
+            searchQuery = '';
+            filterMood('all');
+            switchTab('all');
+        }
+
+        // Main Grid Renderer
+        function renderRecipesGrid() {
+            const grid = document.getElementById('recipeGrid');
+            const emptyState = document.getElementById('emptyState');
+            const recipeCountEl = document.getElementById('recipeCount');
+
+            let filtered = recipes.filter(r => {
+                if (currentTab === 'favs' && !favorites.includes(r.id)) return false;
+                if (currentMood !== 'all' && r.mood !== currentMood) return false;
+
+                if (searchQuery) {
+                    const matchTitle = r.title.toLowerCase().includes(searchQuery);
+                    const matchDesc = r.description.toLowerCase().includes(searchQuery);
+                    const matchIng = r.ingredients.some(i => i.name.toLowerCase().includes(searchQuery));
+                    if (!matchTitle && !matchDesc && !matchIng) return false;
+                }
+
+                return true;
+            });
+
+            recipeCountEl.innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(recipe => {
+                const isFav = favorites.includes(recipe.id);
+                return `
+                    <div class="bg-white rounded-[32px] overflow-hidden border-3 border-mizel-softPink/80 shadow-card hover:shadow-kawaii-hover transition-all duration-300 flex flex-col group transform hover:-translate-y-2">
+                        <!-- Card Header Image -->
+                        <div class="relative h-48 overflow-hidden bg-mizel-softPink">
+                            <img src="${recipe.image}" alt="${recipe.title}" 
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-mizel-darkText/60 via-transparent to-transparent opacity-70"></div>
+                            
+                            <!-- Mood Badge -->
+                            <span class="absolute top-3 left-3 px-3 py-1 bg-white/95 backdrop-blur-md text-mizel-strawberry text-xs font-fredoka font-bold rounded-full shadow-sm border border-mizel-softPink">
+                                ${recipe.moodLabel}
+                            </span>
+
+                            <!-- Favorite Button -->
+                            <button onclick="toggleFavorite('${recipe.id}', event)" 
+                                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-mizel-strawberry flex items-center justify-center shadow-md backdrop-blur-md transition-transform active:scale-90 border border-mizel-softPink jelly-btn">
+                                <i class="${isFav ? 'fa-solid text-mizel-strawberry' : 'fa-regular text-mizel-softPink'} fa-heart text-base"></i>
+                            </button>
+
+                            <!-- Difficulty Badge -->
+                            <span class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-mizel-darkText/80 backdrop-blur-md text-white text-[11px] font-fredoka font-semibold rounded-full">
+                                ${recipe.difficulty}
+                            </span>
+                        </div>
+
+                        <!-- Card Body Content -->
+                        <div class="p-5 flex-grow flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-1 text-amber-400 text-xs mb-1.5 font-bold">
+                                    <i class="fa-solid fa-star"></i>
+                                    <span class="text-mizel-darkText">${recipe.rating}</span>
+                                    <span class="text-mizel-pink font-medium">(${recipe.reviewsCount})</span>
+                                </div>
+                                <h3 class="text-base font-fredoka font-bold text-mizel-darkText leading-snug mb-2 group-hover:text-mizel-strawberry transition-colors line-clamp-1">
+                                    ${recipe.title}
+                                </h3>
+                                <p class="text-xs text-mizel-mutedText font-semibold line-clamp-2 leading-relaxed mb-4">
+                                    ${recipe.description}
+                                </p>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-between text-xs font-bold text-mizel-darkText pt-3 border-t-2 border-mizel-lightPink mb-4">
+                                    <span><i class="fa-solid fa-clock text-mizel-pink mr-1"></i>${recipe.time} Min</span>
+                                    <span><i class="fa-solid fa-fire text-mizel-strawberry mr-1"></i>${recipe.calories} kcal</span>
+                                </div>
+
+                                <button onclick="openRecipeModal('${recipe.id}')" 
+                                    class="w-full py-2.5 rounded-2xl bg-mizel-lightPink hover:bg-mizel-strawberry text-mizel-strawberry hover:text-white font-fredoka font-bold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn border-2 border-mizel-softPink hover:border-transparent shadow-xs jelly-btn">
+                                    <span>Lihat Resep 🍓</span>
+                                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Favorite Toggle Action
+        function toggleFavorite(recipeId, event) {
+            if (event) event.stopPropagation();
+
+            const idx = favorites.indexOf(recipeId);
+            const recipe = recipes.find(r => r.id === recipeId);
+
+            if (idx > -1) {
+                favorites.splice(idx, 1);
+                playPopSound();
+                showToast(`Resep "${recipe.title}" dihapus dari favorit.`, 'info');
+            } else {
+                favorites.push(recipeId);
+                triggerHeartBurst(event ? event.clientX : null, event ? event.clientY : null);
+                showToast(`Resep "${recipe.title}" disimpan ke favorit! 💖`, 'success');
+            }
+
+            saveFavoritesToStorage();
+            renderRecipesGrid();
+
+            if (currentModalRecipe && currentModalRecipe.id === recipeId) {
+                updateModalFavBtnUI();
+            }
+        }
+
+        // Open Recipe Modal
+        function openRecipeModal(recipeId) {
+            playPopSound();
+            const recipe = recipes.find(r => r.id === recipeId);
+            if (!recipe) return;
+
+            currentModalRecipe = recipe;
+            activePortionMultiplier = 1;
+            checkedIngredientsCount = 0;
+
+            document.getElementById('modalImg').src = recipe.image;
+            document.getElementById('modalTitle').innerText = recipe.title;
+            document.getElementById('modalCategory').innerText = recipe.categoryLabel;
+            document.getElementById('modalMoodTag').innerText = recipe.moodLabel;
+            document.getElementById('modalTime').innerText = recipe.time;
+            document.getElementById('modalCalories').innerText = recipe.calories;
+            document.getElementById('modalRating').innerText = recipe.rating;
+            document.getElementById('modalReviews').innerText = recipe.reviewsCount;
+            document.getElementById('modalDesc').innerText = recipe.description;
+
+            document.getElementById('nutrCal').innerText = recipe.nutrition.calories;
+            document.getElementById('nutrCarbs').innerText = recipe.nutrition.carbs;
+            document.getElementById('nutrProtein').innerText = recipe.nutrition.protein;
+            document.getElementById('nutrFat').innerText = recipe.nutrition.fat;
+
+            updateModalFavBtnUI();
+            renderPortionText();
+            renderModalIngredients();
+            renderModalSteps();
+            updateIngredientProgressBar();
+
+            const modal = document.getElementById('recipeDetailModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRecipeModal() {
+            playPopSound();
+            const modal = document.getElementById('recipeDetailModal');
+            const content = document.getElementById('modalContent');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            Object.keys(activeTimerIntervals).forEach(key => clearInterval(activeTimerIntervals[key]));
+            activeTimerIntervals = {};
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                currentModalRecipe = null;
+            }, 200);
+        }
+
+        function updateModalFavBtnUI() {
+            const btn = document.getElementById('modalFavToggleBtn');
+            if (!currentModalRecipe) return;
+
+            const isFav = favorites.includes(currentModalRecipe.id);
+            if (isFav) {
+                btn.className = 'px-5 py-2.5 rounded-full bg-mizel-strawberry text-white font-fredoka font-bold text-xs sm:text-sm transition-colors flex items-center gap-2 shadow-sm jelly-btn';
+                btn.innerHTML = `<i class="fa-solid fa-heart text-white"></i> Tersimpan di Favorit`;
+            } else {
+                btn.className = 'px-5 py-2.5 rounded-full border-2 border-mizel-pink text-mizel-strawberry hover:bg-mizel-softPink font-fredoka font-bold text-xs sm:text-sm transition-colors flex items-center gap-2 jelly-btn';
+                btn.innerHTML = `<i class="fa-regular fa-heart"></i> Simpan ke Favorit`;
+            }
+
+            btn.onclick = (e) => toggleFavorite(currentModalRecipe.id, e);
+        }
+
+        // Portion Scaler Logic
+        function changePortionBy(delta) {
+            playPopSound();
+            const newMult = activePortionMultiplier + delta;
+            if (newMult >= 1 && newMult <= 10) {
+                activePortionMultiplier = newMult;
+                renderPortionText();
+                renderModalIngredients();
+            }
+        }
+
+        function renderPortionText() {
+            document.getElementById('portionCountText').innerText = activePortionMultiplier;
+        }
+
+        function renderModalIngredients() {
+            const container = document.getElementById('modalIngredientsList');
+            if (!currentModalRecipe) return;
+
+            checkedIngredientsCount = 0;
+
+            container.innerHTML = currentModalRecipe.ingredients.map((ing, idx) => {
+                const scaledAmount = ing.baseAmount ? (ing.baseAmount * activePortionMultiplier) : null;
+                const formattedAmount = scaledAmount ? (Math.round(scaledAmount * 10) / 10) : '';
+
+                return `
+                    <li class="flex items-start gap-2.5 bg-white p-2.5 rounded-2xl border-2 border-mizel-softPink shadow-2xs">
+                        <input type="checkbox" id="ing-${idx}" onchange="handleIngredientCheck(this)" class="ingredient-checkbox mt-1 w-4 h-4 text-mizel-strawberry rounded border-mizel-pink focus:ring-mizel-pink cursor-pointer">
+                        <label for="ing-${idx}" class="text-xs sm:text-sm text-mizel-darkText font-bold cursor-pointer select-none leading-tight flex-1">
+                            <span class="font-extrabold text-mizel-strawberry">${formattedAmount} ${ing.unit || ''}</span> ${ing.name}
+                        </label>
+                    </li>
+                `;
+            }).join('');
+
+            updateIngredientProgressBar();
+        }
+
+        function handleIngredientCheck(checkbox) {
+            playPopSound();
+            if (checkbox.checked) {
+                checkedIngredientsCount++;
+            } else {
+                checkedIngredientsCount--;
+            }
+            updateIngredientProgressBar();
+        }
+
+        function updateIngredientProgressBar() {
+            if (!currentModalRecipe) return;
+            const total = currentModalRecipe.ingredients.length;
+            const pct = Math.round((checkedIngredientsCount / total) * 100);
+
+            document.getElementById('ingredientProgressBar').style.width = `${pct}%`;
+            document.getElementById('ingredientProgressText').innerText = `${pct}%`;
+
+            if (pct === 100 && total > 0) {
+                triggerHeartBurst();
+                showToast('Hore! Semua bahan sudah lengkap dan siap diolah! 🎉🍓', 'success');
+            }
+        }
+
+        function renderModalSteps() {
+            const container = document.getElementById('modalStepsList');
+            if (!currentModalRecipe) return;
+
+            container.innerHTML = currentModalRecipe.steps.map((step, idx) => {
+                const hasTimer = step.timerMinutes && step.timerMinutes > 0;
+
+                return `
+                    <div class="flex items-start gap-3 bg-white p-4 rounded-3xl border-2 border-mizel-softPink shadow-xs">
+                        <div class="w-8 h-8 rounded-full bg-mizel-lightPink text-mizel-strawberry font-fredoka font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 border-2 border-mizel-softPink">
+                            ${idx + 1}
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-xs sm:text-sm text-mizel-darkText leading-relaxed font-semibold">${step.text}</p>
+                            
+                            ${hasTimer ? `
+                                <div class="mt-3 pt-2 border-t border-mizel-lightPink flex items-center gap-3">
+                                    <button onclick="startStepTimer(${idx}, ${step.timerMinutes})" id="timerBtn-${idx}" 
+                                        class="px-3.5 py-1.5 rounded-xl bg-mizel-lightPink hover:bg-mizel-softPink text-mizel-strawberry font-fredoka font-bold text-xs flex items-center gap-1.5 transition-colors jelly-btn border border-mizel-softPink">
+                                        <i class="fa-solid fa-stopwatch"></i>
+                                        <span id="timerDisplay-${idx}">Mulai Timer (${step.timerMinutes} Min)</span>
+                                    </button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Step Timer Countdown Logic
+        function startStepTimer(stepIdx, minutes) {
+            playPopSound();
+            const displayBtn = document.getElementById(`timerDisplay-${stepIdx}`);
+            const timerBtn = document.getElementById(`timerBtn-${stepIdx}`);
+
+            if (activeTimerIntervals[stepIdx]) {
+                clearInterval(activeTimerIntervals[stepIdx]);
+                delete activeTimerIntervals[stepIdx];
+                displayBtn.innerText = `Mulai Timer (${minutes} Min)`;
+                timerBtn.className = 'px-3.5 py-1.5 rounded-xl bg-mizel-lightPink hover:bg-mizel-softPink text-mizel-strawberry font-fredoka font-bold text-xs flex items-center gap-1.5 transition-colors jelly-btn border border-mizel-softPink';
+                showToast('Timer dihentikan.', 'info');
+                return;
+            }
+
+            let totalSeconds = minutes * 60;
+            timerBtn.className = 'px-3.5 py-1.5 rounded-xl bg-mizel-strawberry text-white font-fredoka font-bold text-xs flex items-center gap-1.5 transition-colors animate-pulse';
+
+            activeTimerIntervals[stepIdx] = setInterval(() => {
+                totalSeconds--;
+
+                const minsLeft = Math.floor(totalSeconds / 60);
+                const secsLeft = totalSeconds % 60;
+                const formattedTime = `${minsLeft}:${secsLeft < 10 ? '0' : ''}${secsLeft}`;
+
+                displayBtn.innerText = `Sisa Waktu: ${formattedTime} (Stop)`;
+
+                if (totalSeconds <= 0) {
+                    clearInterval(activeTimerIntervals[stepIdx]);
+                    delete activeTimerIntervals[stepIdx];
+                    displayBtn.innerText = `Selesai! 🎉`;
+                    timerBtn.className = 'px-3.5 py-1.5 rounded-xl bg-emerald-500 text-white font-fredoka font-bold text-xs flex items-center gap-1.5';
+                    
+                    triggerHeartBurst();
+                    showToast(`Timer Langkah ${stepIdx + 1} Selesai! 🎉✨`, 'success');
+                }
+            }, 1000);
+        }
+
+        // Surprise Me Function
+        function triggerSurpriseMe() {
+            if (recipes.length === 0) return;
+            const randomIndex = Math.floor(Math.random() * recipes.length);
+            const randomRecipe = recipes[randomIndex];
+
+            triggerHeartBurst();
+            showToast(`✨ Dapur Mizel memilihkan: "${randomRecipe.title}"`, 'success');
+            openRecipeModal(randomRecipe.id);
+        }
+
+        function openAddRecipeModal() {
+            playPopSound();
+            document.getElementById('addRecipeModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddRecipeModal() {
+            playPopSound();
+            document.getElementById('addRecipeModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            document.getElementById('addRecipeForm').reset();
+        }
+
+        function handleAddRecipe(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('newTitle').value.trim();
+            const mood = document.getElementById('newMood').value;
+            const difficulty = document.getElementById('newDifficulty').value;
+            const time = parseInt(document.getElementById('newTime').value) || 20;
+            const calories = parseInt(document.getElementById('newCalories').value) || 200;
+            const img = document.getElementById('newImg').value.trim() || 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80';
+            const desc = document.getElementById('newDesc').value.trim() || 'Resep dessert manis buatan sendiri.';
+            
+            const rawIngs = document.getElementById('newIngredients').value.split('\n').filter(i => i.trim() !== '');
+            const rawSteps = document.getElementById('newSteps').value.split('\n').filter(s => s.trim() !== '');
+
+            const parsedIngredients = rawIngs.map(i => {
+                const parts = i.trim().split(' ');
+                if (parts.length >= 3 && !isNaN(parseFloat(parts[0]))) {
+                    return {
+                        baseAmount: parseFloat(parts[0]),
+                        unit: parts[1],
+                        name: parts.slice(2).join(' ')
+                    };
+                }
+                return { name: i.trim(), baseAmount: null, unit: '' };
+            });
+
+            const parsedSteps = rawSteps.map(s => ({
+                text: s.trim(),
+                timerMinutes: 0
+            }));
+
+            const moodLabels = {
+                'happy': '🍓 Super Happy',
+                'badmood': '🍧 Lagi Badmood',
+                'melted': '🍮 Pengen Melted',
+                'fresh': '🍦 Butuh Seger'
+            };
+
+            const newRecipeObj = {
+                id: 'custom-' + Date.now(),
+                title: title,
+                mood: mood,
+                moodLabel: moodLabels[mood] || '🍓 Super Happy',
+                categoryLabel: 'Custom Dessert',
+                difficulty: difficulty,
+                time: time,
+                calories: calories,
+                rating: 5.0,
+                reviewsCount: 1,
+                image: img,
+                description: desc,
+                ingredients: parsedIngredients,
+                steps: parsedSteps,
+                nutrition: { calories: `${calories} kcal`, carbs: '28g', protein: '4g', fat: '8g' }
+            };
+
+            recipes.unshift(newRecipeObj);
+            saveCustomRecipesToStorage(newRecipeObj);
+
+            closeAddRecipeModal();
+            renderRecipesGrid();
+            triggerHeartBurst();
+            showToast(`Resep "${title}" berhasil disimpan di Dapur Mizel! ✨`, 'success');
+        }
+
+        // Custom Kawaii Toast Message
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            const bgClass = 'bg-mizel-darkText text-white border-2 border-mizel-pink';
+            const icon = type === 'success' ? 'fa-solid fa-sparkles text-mizel-pink' : 'fa-solid fa-heart text-mizel-strawberry';
+
+            toast.className = `pointer-events-auto px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 text-xs sm:text-sm font-fredoka font-bold transition-all duration-300 transform translate-y-4 opacity-0 ${bgClass}`;
+            toast.innerHTML = `<i class="${icon} text-base"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
